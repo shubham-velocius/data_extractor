@@ -7,20 +7,13 @@ on:
       - completed
 
 jobs:
-  build:
+  deploy:
     runs-on: self-hosted
 
     steps:
-    - name: Check disk space
-      run: df -h
-    - name: Check Docker status
-      run: sudo systemctl status docker
-    - name: Pull Docker image
-      run: |
-        sudo docker pull slimd12/data_extractor:latest
-        sudo docker image inspect slimd12/data_extractor:latest
-    - name: Delete Old Docker container
-      run: sudo docker rm -f data_extractor || true
-    - name: Run Docker Container
-      run: sudo docker run -d -p 8080:8080 --name data_extractor slimd12/data_extractor:latest
-    timeout-minutes: 60
+      - name: Pull Docker image
+        run: sudo docker pull slimd12/data_extractor:latest
+      - name: Delete old Docker container
+        run: sudo docker rm -f data_extractor || true
+      - name: Run Docker container
+        run: sudo docker run -d -p 8000:8000 --name data_extractor slimd12/data_extractor
