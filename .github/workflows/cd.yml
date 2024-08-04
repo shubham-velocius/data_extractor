@@ -1,19 +1,13 @@
-name: CD Pipeline
-
-on:
-  workflow_run:
-    workflows: ["CI Pipeline"]
-    types:
-      - completed
-
 jobs:
-  deploy:
-    runs-on: self-hosted
+  build:
+    runs-on: ubuntu-latest
 
     steps:
-      - name: Pull Docker image
-        run: sudo docker pull slimd12/data_extractor:latest
-      - name: Delete old Docker container
-        run: sudo docker rm -f data_extractor || true
-      - name: Run Docker container
-        run: sudo docker run -d -p 8000:8000 --name data_extractor slimd12/data_extractor
+    - name: Check disk space
+      run: df -h
+    - name: Pull Docker image
+      run: docker pull slimd12/data_extractor:latest
+    - name: Delete Old Docker container
+      run: docker rm -f data_extractor || true
+    - name: Run Docker Container
+      run: docker run -d -p 8080:8080 --name data_extractor slimd12/data_extractor:latest
