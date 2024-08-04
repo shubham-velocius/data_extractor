@@ -42,7 +42,7 @@ def extract_fields_from_text(text: str):
     return response.choices[0].text.strip()
 
 @app.post("/hello")
-async def hello_user(name):
+async def hello_user(name: str):
     return f"Hello {name}, How are you"
 
 @app.post("/upload")
