@@ -35,7 +35,7 @@ def extract_fields_from_text(text: str):
         "Please return the data in JSON format."
     )
     response = openai.Completion.create(
-        engine="gpt-3.5-turbo-instruct",
+        engine="gpt-3.5-turbo",
         prompt=prompt,
         max_tokens=1000
     )
