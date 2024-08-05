@@ -43,7 +43,7 @@ def extract_fields_from_text(text: str):
 
 @app.post("/hello")
 async def hello_user(name: str):
-    return f"Hello {name}, How's you!"
+    return f"Hello {name}"
 
 @app.post("/upload")
 async def upload_pdf(file: UploadFile = File(...)):
