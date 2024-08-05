@@ -7,7 +7,7 @@ import os
 
 app = FastAPI()
 
-openai.api_key = 'sk-proj-F28FtxrumBHm95poR8xCT3BlbkFJf7DMrGXsi1LmlLpn1QTF'
+openai.api_key = os.getenv('OPENAI_API_KEY')
 
 class ExtractedData(BaseModel):
     cardholder_name: str
