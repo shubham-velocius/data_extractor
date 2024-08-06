@@ -1,6 +1,6 @@
 from fastapi import FastAPI, UploadFile, File, HTTPException
 from pydantic import BaseModel
-import fitz  # PyMuPDF
+import fitz
 from openai import AsyncAzureOpenAI
 import re
 import os
@@ -92,12 +92,10 @@ async def hello_user(name):
 @app.post("/upload")
 async def upload_pdf(file: UploadFile = File(...)):
     try:
-        # Reset the file pointer before reading
         file.file.seek(0)
         text = extract_text_from_pdf(file)
         
-        if not text.strip():  # If no text is extracted, use OCR
-            # Reset the file pointer before reading for OCR
+        if not text.strip():
             file.file.seek(0)
             text = ocr_pdf(file)
         
