@@ -4,6 +4,7 @@ import fitz  # PyMuPDF
 from openai import AsyncAzureOpenAI
 import re
 import os
+import json
 from dotenv import load_dotenv
 import pytesseract
 from pdf2image import convert_from_bytes
@@ -82,7 +83,7 @@ async def extract_fields_from_text(text: str):
 
     openai_response = response.choices[0].message.content
 
-    return openai_response
+    return json.loads(openai_response)
 
 @app.post("/hello")
 async def hello_user(name):
