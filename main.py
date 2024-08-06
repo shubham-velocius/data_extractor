@@ -87,7 +87,6 @@ async def extract_fields_from_text(text: str):
 
 @app.post("/hello")
 async def hello_user(name):
-    
     return f"Hello {name}"
 
 @app.post("/upload")
